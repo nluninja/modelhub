@@ -1,59 +1,77 @@
-# Azure OpenAI GPT-4 Vision Client
+# AI Model Hub
 
-A Python script to interact with GPT-4 Vision model deployed on Azure OpenAI, supporting both text and image inputs.
+Python scripts to interact with various AI models, supporting both text and image inputs.
+
+## Supported Platforms
+
+- **Azure OpenAI**: GPT-4 Vision model
+- **Google Vertex AI**: Gemini models with multimodal capabilities
 
 ## Features
 
-- Send text messages to GPT-4
-- Analyze images with GPT-4 Vision
+- Send text messages to AI models
+- Analyze images with vision-capable models
 - Support for multiple image formats (JPG, PNG, GIF, WebP)
 - Interactive command-line interface
 - Secure environment variable configuration
+- Support for multimodal inputs (text + multiple images)
 
 ## Prerequisites
 
-- Python 3.7+
-- Azure OpenAI resource with GPT-4 Vision model deployed
-- Required Python packages: `requests`, `python-dotenv` (built-in packages: `os`, `json`, `base64`, `pathlib`)
+- Python 3.8+
+- Access to either:
+  - Azure OpenAI resource with GPT-4 Vision model deployed
+  - Google Cloud Project with Vertex AI API enabled
+- Required Python packages listed in `requirements.txt`
 
 ## Setup
 
 ### 1. Install Dependencies
 
 ```bash
-pip install requests python-dotenv
+pip install -r requirements.txt
 ```
 
-### 2. Configure Azure OpenAI Credentials
+### 2. Configure Credentials
 
-Create a `.env` file in the project directory (recommended):
+Create a `.env` file in the project directory:
 
 ```bash
 # Copy the example file
 cp .env.example .env
+```
 
-# Edit the .env file with your actual values
+Edit the `.env` file with your actual values for the platform(s) you want to use:
+
+#### For Azure OpenAI:
+```
 AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com
 AZURE_OPENAI_API_KEY=your_api_key_from_azure_portal
 AZURE_OPENAI_DEPLOYMENT_NAME=your_gpt4_deployment_name
 ```
 
-**How to get these values:**
+**How to get Azure OpenAI values:**
 1. Go to Azure Portal
 2. Navigate to your Azure OpenAI resource
 3. Go to "Keys and Endpoint" section
 4. Copy the endpoint URL and API key
 5. Deployment name is the name you gave to your GPT-4 model deployment
 
-### 3. Alternative: Environment Variables
-
-You can also set environment variables directly:
-
-```bash
-export AZURE_OPENAI_ENDPOINT="https://your-resource.openai.azure.com"
-export AZURE_OPENAI_API_KEY="your_api_key_from_azure_portal"
-export AZURE_OPENAI_DEPLOYMENT_NAME="your_gpt4_deployment_name"
+#### For Google Vertex AI:
 ```
+GOOGLE_CLOUD_PROJECT=your-project-id
+GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json
+VERTEX_AI_LOCATION=us-central1
+VERTEX_AI_MODEL=gemini-1.5-pro
+```
+
+**How to get Vertex AI values:**
+1. Go to Google Cloud Console
+2. Create or select a project
+3. Enable the Vertex AI API
+4. Create a service account with Vertex AI permissions
+5. Download the service account key JSON file
+6. Set the path to the JSON file in `GOOGLE_APPLICATION_CREDENTIALS`
 
 ## Usage
 
