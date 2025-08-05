@@ -19,6 +19,27 @@ Google Cloud offers several regions within the European Union that comply with G
 ### Recommended Region
 **europe-west1 (Belgium)** is typically recommended for GDPR compliance as it was Google's first EU region and has the most comprehensive service availability.
 
+## Important: Data Residency Guarantees
+
+### What IS Guaranteed in EU Regions:
+✅ **Model inference data** - Prompts and responses stay in specified EU region  
+✅ **Vertex AI service endpoints** - API calls go to EU-based endpoints  
+✅ **Training data** - Stored in EU region  
+✅ **Model artifacts** - Stored in EU region  
+
+### What Requires Additional Configuration:
+⚠️ **Cloud Logging** - By default may be stored globally  
+⚠️ **Cloud Monitoring metrics** - May use global endpoints  
+⚠️ **Service account authentication logs** - Stored globally by default  
+⚠️ **IAM audit logs** - Need explicit EU configuration  
+
+### Full EU Residency Requires:
+1. EU region selection (covered below)
+2. Organization policies for location restrictions
+3. Explicit logging configuration to EU regions
+4. EU-located storage buckets and BigQuery datasets
+5. VPC Service Controls (optional but recommended)
+
 ## Step-by-Step Setup
 
 ### 1. Create Google Cloud Project in EU Region
@@ -175,12 +196,35 @@ gsutil lifecycle set lifecycle.json gs://your-eu-bucket
 }
 ```
 
-### 4. Audit Logging
+### 4. Audit Logging in EU Region
 ```bash
-# Enable audit logs for compliance
+# Create EU-located BigQuery dataset for logs
+bq mk --location=EU --dataset your-eu-project-id:audit_logs_eu
+
+# Enable audit logs with EU storage
 gcloud logging sinks create vertex-ai-audit-sink \
-    bigquery.googleapis.com/projects/your-eu-project-id/datasets/audit_logs \
+    bigquery.googleapis.com/projects/your-eu-project-id/datasets/audit_logs_eu \
     --log-filter='protoPayload.serviceName="aiplatform.googleapis.com"'
+
+# Force all Cloud Logging to EU region
+gcloud logging sinks create all-logs-eu-sink \
+    storage.googleapis.com/your-eu-logs-bucket \
+    --log-filter='resource.type="gce_instance" OR resource.type="aiplatform.googleapis.com"'
+```
+
+### 5. Configure Default Logging Region
+```bash
+# Set organization policy to restrict log storage to EU
+cat > logging-policy.yaml << EOF
+constraint: constraints/gcp.resourceLocations
+listPolicy:
+  allowedValues:
+    - "in:europe-locations"
+  deniedValues: []
+EOF
+
+gcloud resource-manager org-policies set-policy logging-policy.yaml \
+    --project=your-eu-project-id
 ```
 
 ## Model Availability in EU Regions
