@@ -1,5 +1,7 @@
 # AI Model Hub - TODO List
 
+*Last updated: 2025-01-08*
+
 This document tracks planned features and improvements for the AI Model Hub project.
 
 ## AWS Bedrock Integration
