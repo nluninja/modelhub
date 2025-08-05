@@ -4,6 +4,14 @@ import json
 import base64
 from pathlib import Path
 
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    print("Warning: python-dotenv not installed. Using system environment variables only.")
+    print("Install with: pip install python-dotenv")
+
 # --- Configuration - GET THESE FROM AZURE OPENAI ---
 # 1. Go to Azure Portal
 # 2. Navigate to your Azure OpenAI resource
@@ -11,11 +19,10 @@ from pathlib import Path
 # 4. Copy the endpoint URL and API key
 # 5. Make sure you have GPT-4 Vision model deployed
 
-# Set these as environment variables or replace the placeholders directly
-# It's highly recommended to use environment variables for keys.
-# export AZURE_OPENAI_ENDPOINT="YOUR_ENDPOINT_URL_HERE"
-# export AZURE_OPENAI_API_KEY="YOUR_API_KEY_HERE"
-# export AZURE_OPENAI_DEPLOYMENT_NAME="YOUR_GPT4_DEPLOYMENT_NAME"
+# Create a .env file in the project directory with:
+# AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com
+# AZURE_OPENAI_API_KEY=your_api_key_here
+# AZURE_OPENAI_DEPLOYMENT_NAME=your_deployment_name
 
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")

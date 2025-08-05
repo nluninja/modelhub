@@ -14,24 +14,28 @@ A Python script to interact with GPT-4 Vision model deployed on Azure OpenAI, su
 
 - Python 3.7+
 - Azure OpenAI resource with GPT-4 Vision model deployed
-- Required Python packages: `requests` (built-in packages: `os`, `json`, `base64`, `pathlib`)
+- Required Python packages: `requests`, `python-dotenv` (built-in packages: `os`, `json`, `base64`, `pathlib`)
 
 ## Setup
 
 ### 1. Install Dependencies
 
 ```bash
-pip install requests
+pip install requests python-dotenv
 ```
 
 ### 2. Configure Azure OpenAI Credentials
 
-Set the following environment variables:
+Create a `.env` file in the project directory (recommended):
 
 ```bash
-export AZURE_OPENAI_ENDPOINT="https://your-resource.openai.azure.com"
-export AZURE_OPENAI_API_KEY="your_api_key_from_azure_portal"
-export AZURE_OPENAI_DEPLOYMENT_NAME="your_gpt4_deployment_name"
+# Copy the example file
+cp .env.example .env
+
+# Edit the .env file with your actual values
+AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com
+AZURE_OPENAI_API_KEY=your_api_key_from_azure_portal
+AZURE_OPENAI_DEPLOYMENT_NAME=your_gpt4_deployment_name
 ```
 
 **How to get these values:**
@@ -41,14 +45,14 @@ export AZURE_OPENAI_DEPLOYMENT_NAME="your_gpt4_deployment_name"
 4. Copy the endpoint URL and API key
 5. Deployment name is the name you gave to your GPT-4 model deployment
 
-### 3. Alternative Configuration
+### 3. Alternative: Environment Variables
 
-You can also create a `.env` file in the project directory:
+You can also set environment variables directly:
 
-```
-AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com
-AZURE_OPENAI_API_KEY=your_api_key_from_azure_portal
-AZURE_OPENAI_DEPLOYMENT_NAME=your_gpt4_deployment_name
+```bash
+export AZURE_OPENAI_ENDPOINT="https://your-resource.openai.azure.com"
+export AZURE_OPENAI_API_KEY="your_api_key_from_azure_portal"
+export AZURE_OPENAI_DEPLOYMENT_NAME="your_gpt4_deployment_name"
 ```
 
 ## Usage
