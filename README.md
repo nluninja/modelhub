@@ -75,9 +75,9 @@ VERTEX_AI_MODEL=gemini-1.5-pro
 
 ## Usage
 
-### Interactive Mode
+### Azure OpenAI (GPT-4)
 
-Run the script directly:
+Run the Azure OpenAI script:
 
 ```bash
 python azureFoundry.py
@@ -88,10 +88,25 @@ Choose from the menu:
 - **Option 2**: Send image with text prompt to GPT-4 Vision
 - **Option 3**: Exit
 
+### Google Vertex AI (Gemini)
+
+Run the Vertex AI script:
+
+```bash
+python vertex.py
+```
+
+Choose from the menu:
+- **Option 1**: Send text message to Gemini
+- **Option 2**: Send image with text prompt to Gemini Vision
+- **Option 3**: Send multimodal message (text + multiple images)
+- **Option 4**: Exit
+
 ### Programmatic Usage
 
 You can also import and use the functions directly:
 
+#### Azure OpenAI:
 ```python
 from azureFoundry import send_text_message, send_image_message
 
@@ -101,6 +116,23 @@ print(response)
 
 # Analyze image
 response = send_image_message("path/to/image.jpg", "What objects do you see in this image?")
+print(response)
+```
+
+#### Google Vertex AI:
+```python
+from vertex import send_text_message, send_image_message, send_multimodal_message
+
+# Send text message
+response = send_text_message("Explain quantum computing in simple terms")
+print(response)
+
+# Analyze image
+response = send_image_message("path/to/image.jpg", "What objects do you see in this image?")
+print(response)
+
+# Send text with multiple images
+response = send_multimodal_message("Compare these images", ["image1.jpg", "image2.jpg"])
 print(response)
 ```
 
