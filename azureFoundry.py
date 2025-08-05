@@ -1,27 +1,27 @@
 import os
 import requests
 import json
+import base64
+from pathlib import Path
 
-# --- Configuration - GET THESE FROM AZURE AI STUDIO ---
-# 1. Go to Azure AI Studio (ai.azure.com)
-# 2. Navigate to your AI Project.
-# 3. Go to the "Model catalog".
-# 4. Find your desired Llama 3 model (e.g., Meta-Llama-3-8B-Instruct).
-# 5. Click on it. Look for a "Consume" tab or section for the serverless pay-as-you-go endpoint.
-#    You will find the REST endpoint URL and API Keys there.
+# --- Configuration - GET THESE FROM AZURE OPENAI ---
+# 1. Go to Azure Portal
+# 2. Navigate to your Azure OpenAI resource
+# 3. Go to "Keys and Endpoint" section
+# 4. Copy the endpoint URL and API key
+# 5. Make sure you have GPT-4 Vision model deployed
 
 # Set these as environment variables or replace the placeholders directly
 # It's highly recommended to use environment variables for keys.
-# export AZURE_AI_LLAMA_ENDPOINT_URL="YOUR_ENDPOINT_URL_HERE"
-# export AZURE_AI_LLAMA_API_KEY="YOUR_API_KEY_HERE"
+# export AZURE_OPENAI_ENDPOINT="YOUR_ENDPOINT_URL_HERE"
+# export AZURE_OPENAI_API_KEY="YOUR_API_KEY_HERE"
+# export AZURE_OPENAI_DEPLOYMENT_NAME="YOUR_GPT4_DEPLOYMENT_NAME"
 
-AZURE_LLAMA_ENDPOINT_URL = os.getenv("AZURE_AI_LLAMA_ENDPOINT_URL")
-AZURE_LLAMA_API_KEY = os.getenv("AZURE_AI_LLAMA_API_KEY")
+AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
+AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
+AZURE_OPENAI_DEPLOYMENT_NAME = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME", "gpt-4-vision")
 
-# Model name is often part of the endpoint or implied by it.
-# For Llama 3 on Azure, the payload structure is typically like OpenAI's.
-# Note: "Llama 4" is not yet released. We are using Llama 3 as an example.
-MODEL_BEING_USED = "Meta-Llama-3-8B-Instruct (or similar, via Azure AI Studio)"
+MODEL_BEING_USED = "GPT-4 Vision (via Azure OpenAI)"
 
 def call_azure_ai_llama3(messages, temperature=0.7, max_tokens=500, top_p=0.9):
     """
