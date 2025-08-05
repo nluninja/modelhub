@@ -1,5 +1,7 @@
 # AI Model Hub - TODO List
 
+*Last updated: 2025-01-08*
+
 This document tracks planned features and improvements for the AI Model Hub project.
 
 ## AWS Bedrock Integration
@@ -16,6 +18,9 @@ This document tracks planned features and improvements for the AI Model Hub proj
 
 ### Low Priority
 - [ ] Create AWS Bedrock setup guide for different regions
+- [ ] Create AWS Bedrock GDPR configuration guide for EU regions
+- [ ] Document AWS Organizations setup for compliance
+- [ ] Add EU data residency validation for AWS services
 
 ## Future Enhancements
 
