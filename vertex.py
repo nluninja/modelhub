@@ -31,8 +31,13 @@ except ImportError:
 # Create a .env file in the project directory with:
 # GOOGLE_CLOUD_PROJECT=your-project-id
 # GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json
-# VERTEX_AI_LOCATION=us-central1
+# VERTEX_AI_LOCATION=us-central1  # For GDPR compliance, use: europe-west1
 # VERTEX_AI_MODEL=gemini-1.5-pro
+# 
+# For GDPR compliance, use EU regions like:
+# VERTEX_AI_LOCATION=europe-west1  # Belgium (recommended for GDPR)
+# VERTEX_AI_LOCATION=europe-west3  # Frankfurt, Germany
+# VERTEX_AI_LOCATION=europe-west4  # Netherlands
 
 GOOGLE_CLOUD_PROJECT = os.getenv("GOOGLE_CLOUD_PROJECT")
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")

@@ -73,6 +73,10 @@ VERTEX_AI_MODEL=gemini-1.5-pro
 5. Download the service account key JSON file
 6. Set the path to the JSON file in `GOOGLE_APPLICATION_CREDENTIALS`
 
+**For GDPR Compliance:**
+- Use EU regions like `europe-west1` (Belgium), `europe-west3` (Germany), or `europe-west4` (Netherlands)
+- See `vertex-gdpr-setup-guide.md` for detailed GDPR configuration instructions
+
 ## Usage
 
 ### Azure OpenAI (GPT-4)
