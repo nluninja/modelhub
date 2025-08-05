@@ -16,6 +16,9 @@ This document tracks planned features and improvements for the AI Model Hub proj
 
 ### Low Priority
 - [ ] Create AWS Bedrock setup guide for different regions
+- [ ] Create AWS Bedrock GDPR configuration guide for EU regions
+- [ ] Document AWS Organizations setup for compliance
+- [ ] Add EU data residency validation for AWS services
 
 ## Future Enhancements
 
